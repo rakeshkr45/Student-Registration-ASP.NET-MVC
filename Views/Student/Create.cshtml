@@ -1,0 +1,41 @@
+﻿@model StudentReg.Models.StudentView
+
+@{
+    ViewData["Title"] = "Create Student";
+    var ErrorMessage = TempData["ErrorMessage"]?.ToString();
+}
+
+<h3> @ViewData["Title"] </h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(ErrorMessage))
+{
+<div class="alert alert-danger">
+    <strong> Error! </strong>@ErrorMessage
+    <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+</div>
+}
+<form action="Create" method="post" autocomplete="off">
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">College</label>
+        <input type="text" class="form-control" asp-for="College" />
+        <span asp-validation-for="College" class="text-danger"></span>
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
+    }
+}
